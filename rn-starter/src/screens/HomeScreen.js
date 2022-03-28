@@ -2,7 +2,6 @@ import React from "react";
 import { Text, StyleSheet, View,Button,TouchableOpacity} from "react-native";
 
 const HomeScreen = (props) => {
-  console.log(props)
     return (
         <View>
             <Text style={styles.text}>Use this for recap of RN</Text>
@@ -19,6 +18,10 @@ const HomeScreen = (props) => {
            onPress={()=>{props.navigation.navigate("List")}}>
               <Text style = {styles.buttonText}>FlatList demo</Text>
             </TouchableOpacity>
+            <Button
+              title = "Reusable component demo"
+              onPress={()=>{props.navigation.navigate("ImageScrn")}}
+            />
         </View>
     );
 };
