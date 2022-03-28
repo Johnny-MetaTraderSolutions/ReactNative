@@ -6,7 +6,7 @@ const ComponentsScreen = () => {
     const test = "this is a test"
   return (
     <View>
-      <Text style={styles.textStyle}>This is the components screen</Text>
+      <Text style={styles.textStyle}>This is a demo components screen</Text>
       {greeting}
       <Text>{test}</Text>
     </View>
