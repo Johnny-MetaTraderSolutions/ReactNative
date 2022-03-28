@@ -22,6 +22,10 @@ const HomeScreen = (props) => {
               title = "Reusable component demo"
               onPress={()=>{props.navigation.navigate("ImageScrn")}}
             />
+            <Button
+              title = "Counter demo"
+              onPress={()=>{props.navigation.navigate("Counter")}}
+            />
         </View>
     );
 };
