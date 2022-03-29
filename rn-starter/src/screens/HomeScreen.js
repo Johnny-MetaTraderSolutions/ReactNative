@@ -47,6 +47,14 @@ const HomeScreen = (props) => {
             >
                 <Text style={styles.buttonText}>Random color generation demo</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.buttonStyle}
+                onPress={() => {
+                    props.navigation.navigate("Picker");
+                }}
+            >
+                <Text style={styles.buttonText}>Color picker demo</Text>
+            </TouchableOpacity>
         </View>
     );
 };
