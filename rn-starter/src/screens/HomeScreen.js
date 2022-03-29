@@ -39,6 +39,12 @@ const HomeScreen = (props) => {
                     props.navigation.navigate("Counter");
                 }}
             />
+            <Button
+                title="Counter with reducer demo"
+                onPress={() => {
+                    props.navigation.navigate("Reducer");
+                }}
+            />
             <TouchableOpacity
                 style={styles.buttonStyle}
                 onPress={() => {
