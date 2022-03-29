@@ -61,6 +61,12 @@ const HomeScreen = (props) => {
             >
                 <Text style={styles.buttonText}>Color picker demo</Text>
             </TouchableOpacity>
+            <Button
+                title="Text input demo"
+                onPress={() => {
+                    props.navigation.navigate("Text");
+                }}
+            />
         </View>
     );
 };
