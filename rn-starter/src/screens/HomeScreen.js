@@ -67,6 +67,12 @@ const HomeScreen = (props) => {
                     props.navigation.navigate("Text");
                 }}
             />
+            <Button
+                title="Box Object Model demo"
+                onPress={() => {
+                    props.navigation.navigate("Box");
+                }}
+            />
         </View>
     );
 };
