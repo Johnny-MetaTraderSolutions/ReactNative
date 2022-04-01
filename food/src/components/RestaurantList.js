@@ -1,19 +1,55 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    TouchableOpacity,
+} from "react-native";
+import ResultCard from "./ResultCard";
+import { withNavigation } from "react-navigation";
 
-const RestaurantList = ({category}) => {
+const RestaurantList = ({ results, category, navigation }) => {
     return (
         <View>
-            <Text style = {styles.categoryStyle}>{category}</Text>
+            <Text style={styles.categoryStyle}>{category}</Text>
+
+            <FlatList
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                data={results}
+                keyExtractor={(result) => {
+                    return result.id;
+                }}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity
+                            onPress={() =>
+                                navigation.navigate("ResultShow", {
+                                    id: item.id,
+                                })
+                            }
+                        >
+                            <ResultCard
+                                name={item.name}
+                                img={item.image_url}
+                                rating={item.rating}
+                                reviewCount={item.review_count}
+                            />
+                        </TouchableOpacity>
+                    );
+                }}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    categoryStyle:{
-        fontSize:25,
-        fontWeight:"bold",
-    }
+    categoryStyle: {
+        marginLeft: 15,
+        fontSize: 25,
+        fontWeight: "bold",
+    },
 });
 
-export default RestaurantList;
+export default withNavigation(RestaurantList);
