@@ -10,8 +10,11 @@ import ResultCard from "./ResultCard";
 import { withNavigation } from "react-navigation";
 
 const RestaurantList = ({ results, category, navigation }) => {
+    if (!results.length){
+        return null
+    }
     return (
-        <View>
+        <View style = {{marginBottom:10}}>
             <Text style={styles.categoryStyle}>{category}</Text>
 
             <FlatList
