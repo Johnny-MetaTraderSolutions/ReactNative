@@ -1,16 +1,21 @@
 export const BlogReducer = (state, action) => {
     switch (action.type) {
         case "add":
-            console.log("here")
             if (action.payload.title && action.payload.body) {
-                const newState = [...state, action.payload]
-                return newState
+                let newId = Math.floor(Math.random() * 99999);
+                while (!state.filter((i) => i.id === newId)) {
+                    newId = Math.floor(Math.random() * 99999);
+                }
+                action.payload.id = Math.floor(Math.random() * 99999);
+                const newState = [...state, action.payload];
+                return newState;
             }
             return state;
         case "delete":
-            return state
+            const newState = state.filter((i)=>i.id !== action.payload)
+            return newState
         case "edit":
-            return state
+            return state;
         default:
             return state;
     }

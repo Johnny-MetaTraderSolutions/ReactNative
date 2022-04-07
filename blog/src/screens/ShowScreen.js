@@ -1,11 +1,30 @@
-import React from 'react'
-import { View,Text,StyleSheet } from 'react-native'
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
-const ShowScreen= ()=>{
-    return <Text>this is the main page</Text>
+const ShowScreen = ({ navigation }) => {
+    const item = navigation.getParam("item");
+    return (
+        <View style={styles.blogViewStyle}>
+            <Text style={styles.titleStyle}>
+                this is the main page for {item.id}
+                
+            </Text>
+            <Text>this is the main page for {item.id}</Text>
+        </View>
+    );
+};
 
-}
+const styles = StyleSheet.create({
+    blogViewStyle: {
+        borderWidth: 1,
+        marginVertical: 20,
+        paddingVertical: 20,
+    },
+    titleStyle: {
+        fontSize: 20,
+        fontWeight:"bold",
+        
+    },
+});
 
-const styles = StyleSheet.create({})
-
-export default ShowScreen
+export default ShowScreen;

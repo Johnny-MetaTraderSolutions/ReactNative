@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { withNavigation } from "react-navigation";
-import BlogContext from "../context/BlogContext";
+import { Context } from "../context/BlogContext";
 
 const IndexScreen = ({ navigation }) => {
-    const { data, dispatch } = useContext(BlogContext);
+    const { state, dispatch } = useContext(Context);
 
     return (
         <>
@@ -16,19 +16,19 @@ const IndexScreen = ({ navigation }) => {
                     dispatch({
                         type: "add",
                         payload: {
-                            title: `post#${data.length + 1}`,
+                            title: `post#${state.length + 1}`,
                             body: "something",
                         },
                     });
                 }}
             />
-            {data.length == 0 ? null : (
+            {state.length == 0 ? null : (
                 <View style={{ borderBottomWidth: 1, marginTop: 15 }} />
             )}
 
             <FlatList
-                data={data}
-                keyExtractor={(blog) => blog.title}
+                data={state}
+                keyExtractor={(blog) => blog.id}
                 renderItem={({ item }) => {
                     return (
                         <View style={styles.blogReview}>
@@ -36,15 +36,22 @@ const IndexScreen = ({ navigation }) => {
                                 <TouchableOpacity
                                     style={{ padding: 10 }}
                                     onPress={() => {
-                                        navigation.navigate("Show");
+                                        navigation.navigate("Show",{item:item});
                                     }}
                                 >
-                                    <Text>{item.title}</Text>
+                                    <Text>
+                                        {item.title} - {item.id}
+                                    </Text>
                                 </TouchableOpacity>
                             </View>
                             <View>
                                 <TouchableOpacity
-                                    onPress={() => {}}
+                                    onPress={() => {
+                                        dispatch({
+                                            type: "delete",
+                                            payload: item.id ,
+                                        });
+                                    }}
                                     style={{ padding: 10 }}
                                 >
                                     <AntDesign
