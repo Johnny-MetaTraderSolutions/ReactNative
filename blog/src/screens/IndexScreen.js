@@ -1,8 +1,13 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, FlatList, Button } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    Button,
+    TouchableOpacity,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { withNavigation } from "react-navigation";
 import { Context } from "../context/BlogContext";
 
 const IndexScreen = ({ navigation }) => {
@@ -13,11 +18,13 @@ const IndexScreen = ({ navigation }) => {
             <Button
                 title="press to add"
                 onPress={() => {
+                    let newId = Math.floor(Math.random() * 99999);
                     dispatch({
                         type: "add",
                         payload: {
-                            title: `post#${state.length + 1}`,
-                            body: "something",
+                            id: newId,
+                            title: "",
+                            body: "",
                         },
                     });
                 }}
@@ -36,7 +43,9 @@ const IndexScreen = ({ navigation }) => {
                                 <TouchableOpacity
                                     style={{ padding: 10 }}
                                     onPress={() => {
-                                        navigation.navigate("Show",{item:item});
+                                        navigation.navigate("Show", {
+                                            blog: item,
+                                        });
                                     }}
                                 >
                                     <Text>
@@ -49,7 +58,7 @@ const IndexScreen = ({ navigation }) => {
                                     onPress={() => {
                                         dispatch({
                                             type: "delete",
-                                            payload: item.id ,
+                                            payload: item.id,
                                         });
                                     }}
                                     style={{ padding: 10 }}
@@ -68,6 +77,25 @@ const IndexScreen = ({ navigation }) => {
     );
 };
 
+IndexScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: () => (
+            <TouchableOpacity
+                onPress={() => {
+                    let newId = Math.floor(Math.random() * 99999);
+
+                    navigation.navigate("Edit", { newBlog: true, id: newId });
+                }}
+            >
+                <AntDesign
+                    name="plus"
+                    style={{ fontSize: 25, marginRight: 10 }}
+                />
+            </TouchableOpacity>
+        ),
+    };
+};
+
 const styles = StyleSheet.create({
     blogReview: {
         borderTopWidth: 0,
@@ -78,4 +106,4 @@ const styles = StyleSheet.create({
     iconStyle: { fontSize: 20 },
 });
 
-export default withNavigation(IndexScreen);
+export default IndexScreen;

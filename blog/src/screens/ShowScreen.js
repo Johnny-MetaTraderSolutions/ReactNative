@@ -1,17 +1,35 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet,TouchableOpacity } from "react-native";
+import { Entypo } from "@expo/vector-icons";
 
 const ShowScreen = ({ navigation }) => {
-    const item = navigation.getParam("item");
+    const blog = navigation.getParam("blog");
     return (
         <View style={styles.blogViewStyle}>
             <Text style={styles.titleStyle}>
-                this is the main page for {item.id}
-                
+                {blog.title} - {blog.id}
             </Text>
-            <Text>this is the main page for {item.id}</Text>
+            <Text style={styles.bodyStyle}>{blog.body}</Text>
         </View>
     );
+};
+
+ShowScreen.navigationOptions = ({ navigation }) => {
+    const blog = navigation.getParam("blog");
+    return {
+        headerRight: () => (
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate("Edit", { newBlog: false, id: blog.id });
+                }}
+            >
+                <Entypo
+                    name="pencil"
+                    style={{ fontSize: 25, marginRight: 10 }}
+                />
+            </TouchableOpacity>
+        ),
+    };
 };
 
 const styles = StyleSheet.create({
@@ -21,10 +39,12 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
     },
     titleStyle: {
-        fontSize: 20,
-        fontWeight:"bold",
-        
+        fontSize: 25,
+        fontWeight: "bold",
+        textDecorationLine: "underline",
+        marginVertical: 10,
     },
+    bodyStyle: { marginVertical: 10, fontSize: 20 },
 });
 
 export default ShowScreen;
