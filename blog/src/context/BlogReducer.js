@@ -5,7 +5,13 @@ export const BlogReducer = (state, action) => {
         case "delete":
             return state.filter((i) => i.id !== action.payload);
         case "save":
-            return state;
+            if(action.payload.newBlog){
+                return [...state, action.payload.blogInfo];
+            }else{
+                const notChangedBlogs = state.filter((i) => i.id !== action.payload.blogInfo.id)
+                return [...notChangedBlogs, action.payload.blogInfo];
+            }
+            
         default:
             return state;
     }
