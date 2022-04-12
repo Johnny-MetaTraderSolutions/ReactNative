@@ -5,7 +5,6 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    Button,
 } from "react-native";
 import { Context } from "../context/BlogContext";
 
@@ -16,7 +15,7 @@ const EditScreen = ({ navigation }) => {
     const [blogInfo, setBlogInfo] = useState(
         newBlog
             ? { id, title: "", body: "" }
-            : state.filter((blog) => blog.id === id)[0]
+            : state.find((blog) => blog.id === id)
     );
     return (
         <View style={styles.viewAreaStyle}>
@@ -50,6 +49,7 @@ const EditScreen = ({ navigation }) => {
                             newBlog,
                         },
                     });
+
                     navigation.navigate("Index");
                 }}
             >
